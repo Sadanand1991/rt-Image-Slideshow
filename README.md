@@ -1,4 +1,4 @@
-# rt-Image-Slideshow Plugin
+# RT Image Slideshow Plugin
 
 Sliding images in the WordPress fronted area.
 
