@@ -10,7 +10,7 @@ Text Domain: rt-image-slideshow
 if ( ! defined( 'ABSPATH' ) ) {
     exit; // Exit if accessed directly
 }
-
+//plugin path
 define('SLIDESHOW_PATH', plugin_dir_url(__FILE__));
 
 // include admin file 
