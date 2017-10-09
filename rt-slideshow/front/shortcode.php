@@ -2,6 +2,7 @@
 
 // enque front scripts
 function slideshow_front_scripts() {
+    
     wp_enqueue_style( 'rt_custom-style', SLIDESHOW_PATH . 'front/css/slider.css' );
     wp_enqueue_script( 'rt_jssor-script', SLIDESHOW_PATH . 'lib/rt-slider.min.js', array(), '1.0.0', true );
     wp_enqueue_script( 'rt_general-script', SLIDESHOW_PATH . 'front/js/general.js', array(), '1.0.0', true );
