@@ -1,16 +1,3 @@
-=== RT Image Slideshow ===
-
-Contributors: 
-Donate link: 
-Tags: 
-Requires at least: 3.0.1
-Tested up to: 4.8.2
-Requires PHP: 5.2.4
-Stable tag: 4.3
-License: GPLv2 or later
-License URI: 
-
-== Description ==
 
 # RT Image Slideshow Plugin
 
