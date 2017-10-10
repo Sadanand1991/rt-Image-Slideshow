@@ -1,4 +1,5 @@
 === RT Image Slideshow ===
+
 Contributors: 
 Donate link: 
 Tags: 
@@ -8,7 +9,6 @@ Requires PHP: 5.2.4
 Stable tag: 4.3
 License: GPLv2 or later
 License URI: 
- 
 
 == Description ==
 
