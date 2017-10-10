@@ -25,5 +25,6 @@ e.g.
 2. Activate the rt-Image-Slideshow through the 'Plugins' menu in WordPress
 3. 'slideshow-settings' page created in setting area.
  
+Sadanand Lonari
 
  
