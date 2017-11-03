@@ -8,9 +8,11 @@ Requires at least: 4.6
 Tested up to: 4.9
 Stable tag: 4.3
 
+
 Here is a short description of the plugin.
 
 == Description ==
+
 Sliding images in the WordPress fronted area.
 
 Backend Option:
