@@ -34,21 +34,31 @@ class Slideshow_Settings_Page {
 		wp_enqueue_script( 'common' );
 		wp_enqueue_script( 'wp-lists' );
 		wp_enqueue_script( 'postbox' );
-		wp_enqueue_script( 'jquery' );
-		wp_enqueue_script( 'jquery-ui-core' );
-		wp_enqueue_script( 'jquery-ui-tabs' );
-		wp_enqueue_script( 'jquery-ui-sortable' );
-		wp_enqueue_script( 'wp-color-picker' );
-		wp_enqueue_script( 'thickbox' );
-		wp_enqueue_script( 'media-upload' );
-		wp_enqueue_style( 'thickbox' );
-		wp_enqueue_style( 'wp-color-picker' );
-		wp_enqueue_style( 'rt-admin-css', SLIDESHOW_PATH . 'admin/css/slide_admin.css' );
-		wp_enqueue_script( 'rt-admin-js', SLIDESHOW_PATH . 'admin/js/slide_admin.js', array(), null, true );
+
+		wp_enqueue_script(
+			array(
+				'jquery',
+				'jquery-ui-core',
+				'jquery-ui-tabs',
+				'jquery-ui-sortable',
+				'wp-color-picker',
+				'thickbox',
+				'media-upload',
+			)
+		);
 
 		if ( function_exists( 'wp_enqueue_media' ) && ! did_action( 'wp_enqueue_media' ) ) {
 			wp_enqueue_media();
 		}
+
+		wp_enqueue_style(
+			array(
+				'thickbox',
+				'wp-color-picker',
+			)
+		);
+		wp_enqueue_style( 'rt-admin-css', SLIDESHOW_PATH . 'admin/css/slide_admin.css', array(), '1.0.0' );
+		wp_enqueue_script( 'rt-admin-js', SLIDESHOW_PATH . 'admin/js/slide_admin.js', array(), '1.0.0', true );
 
 		add_meta_box( 'slideshow_settings', 'Slideshow Settings', array( $this, 'slideshow_settings' ), $this->pagehook, 'normal', 'core' );
 	}
@@ -105,19 +115,20 @@ class Slideshow_Settings_Page {
 		}
 
 		check_admin_referer( 'slideshow-settings-metaboxes' );
-
-		update_option( 'slideshow_settings', wp_unslash( wp_json_encode( $_POST['slider_image'] ) ) );
+		// First, check if the $_POST['slider_image'] index exists.
+		if ( isset( $_POST['slider_image'] ) ) {
+			$slider_image_data = isset( $_POST['slider_image'] ) ? wp_unslash( $_POST['slider_image'] ) : array();
+			update_option( 'slideshow_settings', wp_json_encode( $slider_image_data ) );
+		}
 		wp_safe_redirect( esc_url_raw( wp_get_referer() ) );
 		exit;
 	}
 
 	/**
 	 * Display slideshow settings.
-	 *
-	 * @param array $data Additional data.
 	 */
-	public function slideshow_settings( $data ) {
-		$slideshow_images = unserialize( get_option( 'slideshow_settings' ) );
+	public function slideshow_settings() {
+		$slideshow_images = json_decode( get_option( 'slideshow_settings' ), true );
 		?>
 		<div id="rt-event_venue" class="field field_type-repeater rt-tab_group-show" data-field_name="event_venue" data-field_key="" data-field_type="repeater">
 			<p class="label"><label for="rt-field-event_venue"><?php esc_html_e( 'Slider Images', 'rt-image-slideshow' ); ?></label></p>
@@ -224,4 +235,4 @@ class Slideshow_Settings_Page {
 }
 
 $subscribe_settings_page       = new Slideshow_Settings_Page();
-$GLOBALS['slideshow_settings'] = unserialize( get_option( 'slideshow_settings' ) );
+$GLOBALS['slideshow_settings'] = json_decode( get_option( 'slideshow_settings' ) );

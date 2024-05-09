@@ -2,6 +2,12 @@
 /**
  * Class Slideshow
  *
+ * @package class-slideshow
+ */
+
+/**
+ * Class Slideshow
+ *
  * Slideshow class for managing slideshow functionality.
  */
 class Slideshow {
@@ -18,7 +24,8 @@ class Slideshow {
 	 * Enqueue front-end scripts and styles for the slideshow.
 	 */
 	public function slideshow_front_scripts() {
-		wp_enqueue_style( 'rt_custom-style', SLIDESHOW_PATH . 'front/css/slider.css', array(), null );
+		wp_enqueue_script( 'jquery' );
+		wp_enqueue_style( 'rt_custom-style', SLIDESHOW_PATH . 'front/css/slider.css', array(), '1.0.0', null );
 		wp_enqueue_script( 'rt_jssor-script', SLIDESHOW_PATH . 'lib/rt-slider.min.js', array(), '1.0.0', true );
 		wp_enqueue_script( 'rt_general-script', SLIDESHOW_PATH . 'front/js/general.js', array(), '1.0.0', true );
 	}
@@ -29,7 +36,7 @@ class Slideshow {
 	 * @return string HTML content for the slideshow.
 	 */
 	public function rtslideshow_callback() {
-		$slideshow_images = wp_json_decode( get_option( 'slideshow_settings' ), true );
+		$slideshow_images = json_decode( get_option( 'slideshow_settings' ), true );
 		$content          = '';
 
 		$content .= '<div id="gallery">
